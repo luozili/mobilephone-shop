@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: mobilephone-shop-order
+
+server:
+  port: 8086
+
+  

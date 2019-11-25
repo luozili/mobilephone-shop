@@ -1,0 +1,4 @@
+.bc{background: url(../images/uploadbc.jpg) center;}
+.i {display: flex; align-items: center; justify-content: center; padding: 18px 0;}
+.i input {display: block; width: 70%; height: 50px; background-color: #888; 
+	border-radius: 50px;border: none; outline: none; text-align: center;color: #03f;opacity: .6;font-size: 2em;}
