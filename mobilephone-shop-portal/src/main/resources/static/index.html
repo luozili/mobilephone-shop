@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="renderer" content="webkit">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Bootstrap 101 Template</title>
+<link rel="stylesheet" href="layui/css/layui.css" media="all">
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/index.css" rel="stylesheet">
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="layui/layui.js" charset="utf-8"></script>
+<script src="js/vue.js" type="text/javascript"></script>
+
+</head>
+<body>
+	<div class="me">
+		<span><a href="/user_car.html"><i id="user-car"
+				class="layui-icon layui-icon-cart"></i></a><a href="myself-info.html"><i
+				class="layui-icon layui-icon-username"
+				style="font-size: 30px; color: #1E9FFF;"></i></a></span>
+	</div>
+	<div class="container" id="app_search">
+		<div class="row search">
+			<label for="inputEmail3"
+				class="right-search col-xs-4 col-sm-2 control-label">商品搜索：</label>
+			<div class="col-xs-7 col-sm-8">
+				<input type="text" class="form-control" id="searchInput"
+					v-model="productName">
+			</div>
+			<button v-on:click="searchProduct" type="button" id="search-button"
+				data-loading-text="Loading..."
+				class="glyphicon glyphicon-search search-button btn btn-primary"
+				autocomplete="off"></button>
+		</div>
+		<div>
+			<div class="row search-result">
+
+				<div>
+					<div class="col-md-2 col-sm-3 product" id="productList"
+						v-for="msg in this.message">
+						<a :href="'product-info.html?'+msg.pid"> <img
+							:src="msg.picture" /> <span>{{msg.pname}}</span> <span
+							class="price">{{msg.prices}}$</span>
+						</a>
+					</div>
+				</div>
+			</div>
+			<div v-if="flag">
+				<div id="demo7"></div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+		var app_search = new Vue({
+			el : '#app_search',
+			data : {
+				productName : 'iphone',
+				message : [],
+				flag : false
+			},
+			watch : {
+				productName : function(val) {
+					this.productName = val;
+				},
+				flag : function(val) {
+					this.flag = val;
+				}
+			},
+			methods : {
+				searchProduct : function(event) {
+					vm = this
+					if (this.productName == '') {
+						alert('please input product name');
+						return;
+					}
+					$.get('/product/search?productName=' + this.productName
+							+ '&pageIndex=' + 0 + '&size=' + 10,
+							function(data) {
+								vm.tem_message = data.message;
+								if (data.message.length == 0) {
+									alert('没有搜索到数据')
+									return;
+								}
+								vm.setFlag();
+								console.log(data.message.length);
+							});
+
+				},
+				setFlag : function() {
+					this.flag = true;
+					layui.use([ 'laypage', 'layer' ], function() {
+						var laypage = layui.laypage, layer = layui.layer;
+						//完整功能
+						laypage.render({
+							elem : 'demo7',
+							count : app_search.tem_message.length,
+							layout : [ 'count', 'prev', 'page', 'next',
+									'limit', 'refresh', 'skip' ],
+							jump : function(obj) {
+								$.get(
+										'/product/search?productName=' + app_search.productName
+												+ '&pageIndex=' + --obj.curr + '&size='
+												+ obj.limit, function(data) {
+											app_search.tem_message = data.message;
+										});
+								this.count = app_search.message.length;
+							}
+						});
+					});
+
+				}
+			},
+			computed : {
+				tem_message : {
+					// getter
+					get : function() {
+						return this.message
+					},
+					// setter
+					set : function(newValue) {
+						this.message = newValue
+					}
+				}
+			}
+		})
+	</script>
+
+</body>
+</html>
