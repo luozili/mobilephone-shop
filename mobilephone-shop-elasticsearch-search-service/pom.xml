@@ -10,8 +10,6 @@
 	<artifactId>mobilephone-shop-elasticsearch-search-service</artifactId>
 	<dependencyManagement>
 		<!-- https://mvnrepository.com/artifact/org.elasticsearch.client/elasticsearch-rest-client-sniffer -->
-
-
 		<dependencies>
 			<dependency>
 				<groupId>org.elasticsearch.client</groupId>

@@ -1,6 +1,6 @@
 spring:
   application:
-    name: mobilephone-shop-portal
+    name: mobilephone-shop-elasticsearch-search-service
 
 server:
   port: 8085

@@ -6,27 +6,42 @@ public class Message {
 	public static final int ok = 200;
 	public static final int fail = 100;
 	private int status = 200;
-	private int errer = 0;
+	private int errno = 0;
 	private String[] data;
 	private Object message;
 	public Message() {
 		super();
 	}
 	
+	public Message(int status, Object message) {
+		super();
+		this.status = status;
+		this.message = message;
+	}
+
+	public Message(int status, int errno, String[] data, Object message) {
+		super();
+		this.status = status;
+		this.errno = errno;
+		this.data = data;
+		this.message = message;
+	}
+
 	public Message(int status) {
 		super();
 		this.status = status;
 	}
 
-	public Message(int status, int errer, String[] data, Object message) {
-		super();
-		this.status = status;
-		this.errer = errer;
-		this.data = data;
-		this.message = message;
-	}
 	public Message(String ...data) {
 		this.data = data;
+	}
+
+	public int getErrno() {
+		return errno;
+	}
+
+	public void setErrno(int errno) {
+		this.errno = errno;
 	}
 
 	public int getStatus() {
@@ -34,12 +49,6 @@ public class Message {
 	}
 	public void setStatus(int status) {
 		this.status = status;
-	}
-	public int getErrer() {
-		return errer;
-	}
-	public void setErrer(int errer) {
-		this.errer = errer;
 	}
 	public String[] getData() {
 		return data;
@@ -53,9 +62,10 @@ public class Message {
 	public void setMessage(Object message) {
 		this.message = message;
 	}
+
 	@Override
 	public String toString() {
-		return "Message [status=" + status + ", errer=" + errer + ", data=" + Arrays.toString(data) + ", message="
+		return "Message [status=" + status + ", errno=" + errno + ", data=" + Arrays.toString(data) + ", message="
 				+ message + "]";
 	}
 

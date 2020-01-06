@@ -1,6 +1,6 @@
 spring:
   application:
-    name: single-login-system
+    name: mobilephone-shop-product-manage-service
 
 server:
   port: 8084
