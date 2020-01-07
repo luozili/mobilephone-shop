@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: mobilephone-shop-elasticsearch-search-service
+
+server:
+  port: 8085

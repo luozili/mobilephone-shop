@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>wangEditor demo</title>
+<link rel="stylesheet" type="text/css" href="css/upload-data.css">
+<link href="css/bootstrap.min.css" rel="stylesheet">
+
+
+</head>
+<body>
+	
+	<form class="layui-form" action="/full/upload" method="post"
+		enctype="multipart/form-data">
+		<div class="bc">
+			<div class="i layui-form-item">
+				<input type="file" name="file" lay-verify="required"
+					value="Primary Picture">
+			</div>
+			<div class="i layui-form-item">
+				<input type="text" name="pname" lay-verify="required"
+					placeholder="Product Name">
+			</div>
+			<div class="i layui-form-item">
+				<input type="text" name="prices" lay-verify="required"
+					placeholder="Product Prices">
+			</div>
+			<input type="hidden" name="pdesc" class="pdesc">
+		</div>
+		<div id="editor">
+			<p>
+				欢迎使用 <b>wangEditor</b> 富文本编辑器
+			</p>
+		</div>
+
+		<!-- 注意， 只需要引用 JS，无需引用任何 CSS ！！！-->
+
+		<script type="text/javascript">
+			var E = window.wangEditor;
+			var editor = new E('#editor');
+			// 或者 var editor = new E( document.getElementById('editor') )
+			editor.customConfig.uploadImgServer = '/single/upload';
+			/* editor.customConfig.uploadImgShowBase64 = true; */
+			editor.customConfig.uploadFileName = 'file';
+			editor.create();
+			editor.txt.html('');
+		</script>
+		<div class="i layui-form-item">
+			<div class="layui-input-block">
+				<button onclick="$('.pdesc').val(editor.txt.html());" class="layui-btn" lay-submit lay-filter="*">立即提交</button>
+				<button type="reset" class="layui-btn layui-btn-primary">重置</button>
+			</div>
+		</div>
+
+	</form>
+</body>
+</html>

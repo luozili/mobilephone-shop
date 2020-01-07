@@ -1,0 +1,8 @@
+body {padding: 50px;display: flex; align-items: center; justify-content: center;opacity: .9;}
+.bc div {display: flex; align-items: center; justify-content: center;padding: 20px;}
+.bc {background-color: #000;width: 450px;height: 600px}
+.f-user {font-size: 50px; color: #aaa;}
+.i {color: #fff;}
+.i b {display: inline-block;width: 20px;}
+.date{color: #007;}
+#sbtn{border-radius: 50px;outline: none;}

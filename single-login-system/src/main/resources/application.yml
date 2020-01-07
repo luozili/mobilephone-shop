@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: single-login-system
+
+server:
+  port: 8082
