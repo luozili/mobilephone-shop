@@ -9,16 +9,21 @@
 
 </head>
 <body>
-	<form action="/full/upload" method="post" enctype="multipart/form-data">
+	
+	<form class="layui-form" action="/full/upload" method="post"
+		enctype="multipart/form-data">
 		<div class="bc">
-			<div class="i">
-				<input type="file" name="file" value="Primary Picture">
+			<div class="i layui-form-item">
+				<input type="file" name="file" lay-verify="required"
+					value="Primary Picture">
 			</div>
-			<div class="i">
-				<input type="text" name="pname" placeholder="Product Name">
+			<div class="i layui-form-item">
+				<input type="text" name="pname" lay-verify="required"
+					placeholder="Product Name">
 			</div>
-			<div class="i">
-				<input type="text" name="prices" placeholder="Product Prices">
+			<div class="i layui-form-item">
+				<input type="text" name="prices" lay-verify="required"
+					placeholder="Product Prices">
 			</div>
 			<input type="hidden" name="pdesc" class="pdesc">
 		</div>
@@ -29,7 +34,7 @@
 		</div>
 
 		<!-- 注意， 只需要引用 JS，无需引用任何 CSS ！！！-->
-		
+
 		<script type="text/javascript">
 			var E = window.wangEditor;
 			var editor = new E('#editor');
@@ -40,18 +45,13 @@
 			editor.create();
 			editor.txt.html('');
 		</script>
-		<div class="div-btn i">
-			<button class="btn btn-default"
-				onclick="javascript:window.history.back(-1);">返回</button>
-			<button class="btn btn-success btn-submit">提交</button>
+		<div class="i layui-form-item">
+			<div class="layui-input-block">
+				<button onclick="$('.pdesc').val(editor.txt.html());" class="layui-btn" lay-submit lay-filter="*">立即提交</button>
+				<button type="reset" class="layui-btn layui-btn-primary">重置</button>
+			</div>
 		</div>
 
 	</form>
-	<script type="text/javascript">
-		$('.btn-submit').click(function() {
-			$('.pdesc').val(editor.txt.html());
-			$('form').submit();
-		});
-	</script>
 </body>
 </html>

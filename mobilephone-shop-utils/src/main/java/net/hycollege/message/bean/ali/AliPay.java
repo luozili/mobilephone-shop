@@ -6,53 +6,66 @@ public class AliPay {
 	/**
 	 * 商户订单号
 	 */
-	private String ut_trade_no;
+	private String out_trade_no;
+	private String product_code = "FAST_INSTANT_TRADE_PAY";
 	private float total_amount;
 	private String subject;
-	private static final String product_code = "FAST_INSTANT_TRADE_PAY";
-	private List<AliGoods> aliGoodses;
-	
-	public AliPay(String ut_trade_no, float total_amount, String subject, List<AliGoods> aliGoodses) {
-		super();
-		this.ut_trade_no = ut_trade_no;
-		this.total_amount = total_amount;
-		this.subject = subject;
-		this.aliGoodses = aliGoodses;
-	}
+	private List<AliGoods> goods_detail;
+
 	public AliPay() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public String getUt_trade_no() {
-		return ut_trade_no;
+
+	public AliPay(String out_trade_no, String product_code, float total_amount, String subject,
+			List<AliGoods> goods_detail) {
+		super();
+		this.out_trade_no = out_trade_no;
+		this.product_code = product_code;
+		this.total_amount = total_amount;
+		this.subject = subject;
+		this.goods_detail = goods_detail;
 	}
-	public void setUt_trade_no(String ut_trade_no) {
-		this.ut_trade_no = ut_trade_no;
+
+	public String getOut_trade_no() {
+		return out_trade_no;
 	}
+
+	public void setOut_trade_no(String out_trade_no) {
+		this.out_trade_no = out_trade_no;
+	}
+
 	public float getTotal_amount() {
 		return total_amount;
 	}
+
 	public void setTotal_amount(float total_amount) {
 		this.total_amount = total_amount;
 	}
+
 	public String getSubject() {
 		return subject;
 	}
+
 	public void setSubject(String subject) {
 		this.subject = subject;
 	}
-	public static String getProductCode() {
+
+	public String getProduct_code() {
 		return product_code;
 	}
-	public List<AliGoods> getAliGoodses() {
-		return aliGoodses;
+
+	public void setProduct_code(String product_code) {
+		this.product_code = product_code;
 	}
-	public void setAliGoodses(List<AliGoods> aliGoodses) {
-		this.aliGoodses = aliGoodses;
+
+	public List<AliGoods> getGoods_detail() {
+		return goods_detail;
 	}
-	@Override
-	public String toString() {
-		return "AliPay [ut_trade_no=" + ut_trade_no + ", total_amount=" + total_amount + ", subject=" + subject + "]";
+
+	public void setGoods_detail(List<AliGoods> goods_detail) {
+		this.goods_detail = goods_detail;
 	}
-	
+
+
 }

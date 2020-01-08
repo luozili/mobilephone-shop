@@ -1,7 +1,6 @@
 package net.hycollege.portal.configuration;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.data.redis.RedisProperties.Jedis;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
@@ -24,7 +23,8 @@ public class ProtalConfiguration {
 	@Bean
 	public MappedInterceptor getMappedInterceptor() {
 		return new MappedInterceptor(new String[] { "/**" },
-				new String[] { "/login.html", "/css/**", "/images/**", "/js/**", "/admin/login" }, loginInterceptor);
+				new String[] { "/login.html","/layui/**","/lay/**", "/register.html", "/css/**", "/fonts/**", "/images/**", "/js/**", "/user/login" ,"/login", "/user/register"},
+				loginInterceptor);
 	}
 
 	@Bean
@@ -49,6 +49,7 @@ public class ProtalConfiguration {
 	public LettuceConnectionFactory redisConnectionFactory() {
 		return new LettuceConnectionFactory(new RedisStandaloneConfiguration("127.0.0.1", 6379));
 	}
+
 	@Bean
 	public RestTemplate restTemplate() {
 		return new RestTemplate();
