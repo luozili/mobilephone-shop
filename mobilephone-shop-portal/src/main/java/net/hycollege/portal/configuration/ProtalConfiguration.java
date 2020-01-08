@@ -55,3 +55,4 @@ public class ProtalConfiguration {
 		return new RestTemplate();
 	}
 }
+

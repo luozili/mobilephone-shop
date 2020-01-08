@@ -1,0 +1,103 @@
+DROP DATABASE IF EXISTS demo;
+create database demo charset=utf8;
+use demo;
+drop table IF EXISTS t_user;
+create table t_user(
+	uid varchar(50) CHARACTER SET utf8 COLLATE utf8_bin primary key,
+	username varchar(40) CHARACTER SET utf8 COLLATE utf8_bin not null,
+	password varchar(255) CHARACTER SET utf8 COLLATE utf8_bin not null,
+	-- default recieve infomation
+	recieve varchar(50) CHARACTER SET utf8 COLLATE utf8_bin,
+	phone char(11) CHARACTER SET utf8 COLLATE utf8_bin,
+	sex char(1) CHARACTER SET utf8 COLLATE utf8_bin,-- 1:male 2:female
+	birthday char(10) CHARACTER SET utf8 COLLATE utf8_bin
+)  ENGINE=INNODB, charset=utf8;
+drop table IF EXISTS t_adress;
+create table t_adress(
+	aid varchar(50) CHARACTER SET utf8 COLLATE utf8_bin primary key,
+	auid varchar(50) CHARACTER SET utf8 COLLATE utf8_bin,
+	username varchar(40) CHARACTER SET utf8 COLLATE utf8_bin not null,
+	adress varchar(255) CHARACTER SET utf8 COLLATE utf8_bin not null,
+	phone char(11) CHARACTER SET utf8 COLLATE utf8_bin,
+	FOREIGN KEY (auid)
+      	REFERENCES t_user(uid)
+)  ENGINE=INNODB, charset=utf8;
+drop table IF EXISTS t_product;
+create table t_product(
+	pid varchar(50) CHARACTER SET utf8 COLLATE utf8_bin primary key,
+	picture varchar(255) CHARACTER SET utf8 COLLATE utf8_bin not null,
+	pname varchar(60) CHARACTER SET utf8 COLLATE utf8_bin not null,
+	-- uploaddate varchar(20) CHARACTER SET utf8 COLLATE utf8_bin not null,
+	status char(1) CHARACTER SET utf8 COLLATE utf8_bin default '1',
+	prices float not null
+)  ENGINE=INNODB, charset=utf8;
+drop table IF EXISTS t_user_product;
+create table t_user_product(
+	upid varchar(50) CHARACTER SET utf8 COLLATE utf8_bin primary key,
+	pid varchar(50) CHARACTER SET utf8 COLLATE utf8_bin not null,
+	uid varchar(50) CHARACTER SET utf8 COLLATE utf8_bin not null,
+	status char(1) CHARACTER SET utf8 COLLATE utf8_bin, -- 1:bought 2:store
+	-- buyingtime varchar(20) CHARACTER SET utf8 COLLATE utf8_bin not null,
+	pnumber int not null,
+	prices float not null,
+	grosssum float not null,
+	FOREIGN KEY (uid)
+      	REFERENCES t_user(uid),
+	FOREIGN KEY (pid)
+      	REFERENCES t_product(pid)
+)  ENGINE=INNODB, charset=utf8;
+drop table IF EXISTS t_product_desc;
+create table t_product_desc(
+	pdid varchar(50) CHARACTER SET utf8 COLLATE utf8_bin primary key,
+	pdesc text CHARACTER SET utf8 COLLATE utf8_bin,
+	FOREIGN KEY (pdid)
+      	REFERENCES t_product(pid)
+)  ENGINE=INNODB, charset=utf8;
+drop table IF EXISTS t_admin;
+create table t_admin(
+	uid varchar(50) CHARACTER SET utf8 COLLATE utf8_bin primary key,
+	username varchar(40) CHARACTER SET utf8 COLLATE utf8_bin not null,
+	password varchar(255) CHARACTER SET utf8 COLLATE utf8_bin not null
+)  ENGINE=INNODB, charset=utf8;
+-- create car of user for user to relate product
+drop table IF EXISTS t_user_car;
+create table t_user_car(
+	cid varchar(50) CHARACTER SET utf8 COLLATE utf8_bin primary key,
+	uid varchar(50) CHARACTER SET utf8 COLLATE utf8_bin not null,
+	pid varchar(50) CHARACTER SET utf8 COLLATE utf8_bin not null,
+	-- into_car_time varchar(20) CHARACTER SET utf8 COLLATE utf8_bin not null,
+	pnumber int not null,
+	FOREIGN KEY (uid)
+      	REFERENCES t_user(uid),
+	FOREIGN KEY (pid)
+      	REFERENCES t_product(pid)
+)  ENGINE=INNODB, charset=utf8;
+drop table IF EXISTS t_order;
+create table t_order(
+	oid varchar(50) CHARACTER SET utf8 COLLATE utf8_bin primary key,
+	uid varchar(50) CHARACTER SET utf8 COLLATE utf8_bin not null,
+	out_trade_no varchar(50) CHARACTER SET utf8 COLLATE utf8_bin,
+	trade_no varchar(50) CHARACTER SET utf8 COLLATE utf8_bin,
+	gmt_payment varchar(50) CHARACTER SET utf8 COLLATE utf8_bin,
+	total_amount float,
+	trade_status varchar(50) CHARACTER SET utf8 COLLATE utf8_bin,
+	FOREIGN KEY (uid)
+      	REFERENCES t_user(uid)
+)  ENGINE=INNODB, charset=utf8;
+drop table IF EXISTS t_order_product;
+create table t_order_product(
+	opid varchar(50) CHARACTER SET utf8 COLLATE utf8_bin primary key,
+	oid varchar(50) CHARACTER SET utf8 COLLATE utf8_bin not null,
+	pid varchar(50) CHARACTER SET utf8 COLLATE utf8_bin not null,
+	pnumber int not null,
+	FOREIGN KEY (oid)
+      	REFERENCES t_order(oid),
+	FOREIGN KEY (pid)
+      	REFERENCES t_product(pid)
+)  ENGINE=INNODB, charset=utf8;
+
+
+
+
+
+
