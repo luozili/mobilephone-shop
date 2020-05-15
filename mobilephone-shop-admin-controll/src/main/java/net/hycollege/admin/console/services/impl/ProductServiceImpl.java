@@ -85,7 +85,8 @@ public class ProductServiceImpl implements ProductService {
 			HttpEntity<MultiValueMap<String, String>> requestEntity = new HttpEntity<MultiValueMap<String, String>>(
 					postParameters, headers);
 
-			return restTemplate.postForObject("http://193.112.173.11:8084/product/delete", requestEntity, Message.class);
+			return restTemplate.postForObject("http://193.112.173.11:8084/product/delete", requestEntity,
+					Message.class);
 		} catch (Exception e) {
 			System.out.println(e);
 			return new Message(Message.fail);
@@ -101,7 +102,8 @@ public class ProductServiceImpl implements ProductService {
 					esProduct);
 			HttpEntity<String> requestEntity = new HttpEntity<String>(
 					objectMapper.writeValueAsString(productMessageAndESProduct), headers);
-			return restTemplate.postForObject("http://193.112.173.11:8084/product/update", requestEntity, Message.class);
+			return restTemplate.postForObject("http://193.112.173.11:8084/product/update", requestEntity,
+					Message.class);
 		} catch (Exception e) {
 			System.out.println(e);
 			e.printStackTrace();

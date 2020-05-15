@@ -116,7 +116,6 @@ public class SearchProductDaoImpl implements SearchProductDao {
 	public void updateProduct2Elasticsearch(ESProduct esProduct) {
 			deleteDocument(esProduct.getPid());
 			addProduct2Elasticsearch(esProduct);
-			System.out.println("update success on es");
 	}
 	@Override
 	public void deleteDocument(String productID) {
