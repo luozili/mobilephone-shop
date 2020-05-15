@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
 <title>Bootstrap 101 Template</title>
-<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/bootstrap.css" rel="stylesheet">
 <link href="css/login.css" rel="stylesheet">
 <!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
 <script src="js/jquery.min.js"></script>
@@ -18,30 +18,40 @@
 	<div class="bc">
 		<div class="sign">Sign In</div>
 		<div class="i">
-			<input class="username" type="text" name="username" 
+			<input class="username" type="text" name="username"
 				placeholder="User Name">
 		</div>
 		<div class="i">
-			<input class="password" type="password" name="password" 
+			<input class="password" type="password" name="password"
 				placeholder="********">
 		</div>
 		<div class="dsbtn">
 			<button id="sbtn" type="submit" class="btn btn-primary">Sign
 				In</button>
 		</div>
+		<p class="login">
+			no have account, <a href="register.html">Go to register!</a>
+		</p>
 	</div>
 	<script type="text/javascript">
 		$('#sbtn').click(function() {
+			var username = $('.username').val();
+			var password = $('.password').val();
+			if (username == '' || password == '') {
+				alert('please input value');
+				return;
+			}
+
 			var data = {
-				'username' : $('.username').val(),
-				'password' : $('.password').val()
+				'username' : username,
+				'password' : password
 			};
-			$.post("http://localhost:8081/user/login", data, function(result) {
-				alert(result);
-				if (result.status == 200)
-					location.href = "/admim-index.html";
-				else
-					alert("please input sure user name or password");
+			$.post("/user/login", data, function(result) {
+				if (result.status == 200) {
+					location.href = '/index.html'
+					return;
+				}
+				alert("please input sure user name or password");
 			});
 		});
 	</script>

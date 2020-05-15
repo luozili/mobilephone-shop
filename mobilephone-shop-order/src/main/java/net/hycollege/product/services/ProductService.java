@@ -1,8 +1,8 @@
 package net.hycollege.product.services;
 
 
-import net.hycollege.message.bean.LayUITableMessage;
-import net.hycollege.message.bean.ProductMessage;
+import net.hycollege.message.bean.layui.LayUITableMessage;
+import net.hycollege.message.bean.product.ProductMessage;
 
 public interface ProductService {
 	public ProductMessage selectOneProduct(String productID);

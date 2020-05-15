@@ -36,7 +36,7 @@
 				'username' : $('.username').val(),
 				'password' : $('.password').val()
 			};
-			$.post("http://localhost:8081/admin/login", data, function(result) {
+			$.post("/admin/login", data, function(result) {
 				if (result.status == 200)
 					location.href = "/admim-index.html";
 				else

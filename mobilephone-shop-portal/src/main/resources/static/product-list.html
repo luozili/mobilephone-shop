@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="renderer" content="webkit">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Insert title here</title>
+</head>
+<body>
+	<div>
+		<div id="app" class="row search-result">
+			<!-- <div v-if="message != null">
+					<div class="col-md-2 col-sm-3 product" v-for="msg in message">
+						<a href="/select/product?productID={{msg.pid}}"> <img
+							src="{{ msg.picture }}" /> <span>{{msg.pname}}</span> <span
+							class="price">{{msg.prices}}$</span>
+						</a>
+					</div>
+				</div> -->
+		</div>
+		<div id="demo7"></div>
+		<script type="text/javascript">
+			$('#search-button').click(function() {
+
+			});
+			layui.use([ 'laypage', 'layer' ], function() {
+				var laypage = layui.laypage, layer = layui.layer;
+				//完整功能
+				laypage.render({
+					elem : 'demo7',
+					count : 0,
+					layout : [ 'count', 'prev', 'page', 'next', 'limit',
+							'refresh', 'skip' ],
+					jump : function(obj) {
+						size = obj.limit;
+						pageIndex = obj.index;
+						searchByProductName(productName, pageIndex, size);
+						setCount = function(data) {
+							count = data.totalCount
+						};
+					}
+				});
+			});
+		</script>
+	</div>
+	<script>
+		new Vue({
+			el : '#search',
+			data : {
+				productName : 'iphone',
+			},
+			watch : {
+				productName : function(val) {
+					this.productName = val;
+				}
+			},
+			methods : {
+				search : function(event) {
+					searchByProductName(productName, pageIndex, size);
+				}
+			}
+		});
+		var vm = new Vue({
+			el : '#app',
+			data : {}
+		});
+	</script>
+</body>
+</html>

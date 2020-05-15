@@ -8,9 +8,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import net.hycollege.message.bean.Message;
+import net.hycollege.message.bean.layui.LayUITableMessage;
+import net.hycollege.mybatis.domain.Adress;
 import net.hycollege.mybatis.domain.User;
 import net.hycollege.services.AdminServices;
 import net.hycollege.services.UserServices;
+
 @RestController
 public class UserControll {
 	@Autowired(required = true)
@@ -22,10 +25,12 @@ public class UserControll {
 	public User login(String username, String password) {
 		return userServices.select(username, password);
 	}
+
 	@PostMapping(value = "/admin/login")
 	public Message adminLogin(String username, String password) {
 		return adminServices.select(username, password);
 	}
+
 	@PostMapping("/user/register")
 	public Message register(@RequestBody User user) {
 		try {
@@ -43,8 +48,8 @@ public class UserControll {
 		String password = user.getPassword();
 		if (username == null || username.length() == 0 || username.length() > 20 || password == null
 				|| password.length() == 0)
-			return false;
-		return true;
+			return true;
+		return false;
 	}
 
 	@PostMapping("/user/update")
@@ -55,5 +60,41 @@ public class UserControll {
 			return new Message(Message.fail);
 		}
 		return new Message(Message.ok);
+	}
+
+	@PostMapping("/user/adress/insert")
+	public Message insertUserAdress(@RequestBody Adress adress) {
+		try {
+			return userServices.insertUserAdress(adress);
+		} catch (Exception e) {
+			return new Message(Message.fail);
+		}
+	}
+
+	@PostMapping("/user/adress/delete")
+	public Message deleteUserAdress(String aid) {
+		try {
+			return userServices.deleteUserAdress(aid);
+		} catch (Exception e) {
+			return new Message(Message.fail);
+		}
+	}
+
+	@PostMapping("/user/adress/update")
+	public Message updateUserAdress(@RequestBody Adress adress) {
+		try {
+			return userServices.updateUserAdress(adress);
+		} catch (Exception e) {
+			return new Message(Message.fail);
+		}
+	}
+
+	@GetMapping("/user/adress/select")
+	public LayUITableMessage selectUserAdress(String auid) {
+		try {
+			return userServices.selectUserAdress(auid);
+		} catch (Exception e) {
+			return null;
+		}
 	}
 }
