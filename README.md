@@ -1,1 +1,2 @@
 # mobilephone-shop
+是用SpringBoot快速整合SpringMVC、Spring和Mybatis开发的销售手机的商城项目。详细请看项目描述
